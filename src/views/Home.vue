@@ -8,4 +8,10 @@
       <a href="/register" class="bg-gray-600 text-white px-6 py-2 rounded-lg">Register</a>
     </div>
   </div>
+
+  <div class="mt-8">
+  <router-link to="/gallery" class="text-blue-600 underline">
+    Browse Gallery (for buyers)
+  </router-link>
+</div>
 </template>

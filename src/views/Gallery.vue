@@ -26,7 +26,7 @@
       </select>
     </div>
 
-
+    
     <div v-if="filteredFlyers.length === 0" class="text-center text-gray-500 py-10">
       No flyers found.
     </div>
@@ -39,14 +39,14 @@
           <p class="text-gray-600 text-sm mb-2">{{ flyer.description.substring(0, 100) }}...</p>
           
           <div class="flex justify-between items-center mb-2">
-            <span class="text-lg font-bold">{{ flyer.price }} CFA</span>
+            <span class="text-lg font-bold">{{ flyer.price }} RWF</span>
             <span class="text-xs bg-gray-200 px-2 py-1 rounded">{{ flyer.category }}</span>
           </div>
           
           <p class="text-sm text-gray-500 mb-3">Artisan: {{ flyer.artisanName }}</p>
           
           <button 
-            @click="contactArtisan(flyer)"
+            @click="openContactModal(flyer)"
             class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
           >
             Contact Artisan
@@ -54,20 +54,31 @@
         </div>
       </div>
     </div>
+
+    <!-- Contact Modal -->
+    <ContactForm 
+      v-if="showContactModal"
+      :artisan="selectedArtisan"
+      @close="showContactModal = false"
+    />
   </div>
 </template>
 
 <script>
 import authStore from '../stores/authStore'
 import flyerStore from '../stores/flyerStore'
+import ContactForm from '../components/messaging/ContactForm.vue'
 
 export default {
+  components: { ContactForm },
   data() {
     return {
       user: authStore.getCurrentUser(),
       flyers: [],
       searchQuery: '',
-      selectedCategory: ''
+      selectedCategory: '',
+      showContactModal: false,
+      selectedArtisan: null
     }
   },
   computed: {
@@ -87,8 +98,13 @@ export default {
     loadFlyers() {
       this.flyers = flyerStore.getAll()
     },
-    contactArtisan(flyer) {
-      alert(`📧 Contact ${flyer.artisanName} at (simulated messaging system)\n\nProduct: ${flyer.name}`)
+    openContactModal(flyer) {
+      this.selectedArtisan = {
+        id: flyer.artisanId,
+        name: flyer.artisanName,
+        productName: flyer.name
+      }
+      this.showContactModal = true
     },
     logout() {
       authStore.logout()
