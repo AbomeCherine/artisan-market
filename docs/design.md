@@ -34,15 +34,17 @@ All text uses the system font stack for simplicity:
 ## 3. Components
 
 ### Icons (Font Awesome)
+```html
 
 <i class="fas fa-plus"></i>  <!-- Add icon -->
 <i class="fas fa-trash"></i> <!-- Delete icon -->
 <i class="fas fa-edit"></i>  <!-- Edit icon -->
 <i class="fas fa-user"></i>  <!-- User icon -->
 
+```
 
 ### Buttons
-
+```css
 .btn-primary {
 background-color: #3b82f6;
 color: white;
@@ -65,9 +67,11 @@ border-radius: 0.375rem;
 .btn-danger:hover {
 background-color: #dc2626;
 }
-
+```
 
 ### Navigation Bar
+
+```css
 .navbar {
 background: white;
 border-bottom: 1px solid #e5e7eb;
@@ -76,9 +80,9 @@ position: sticky;
 top: 0;
 z-index: 50;
 }
-
-
+```
 ### Dashboard Card
+```css
 .dashboard-card {
 background: white;
 border: 1px solid #e5e7eb;
@@ -91,9 +95,10 @@ transition: box-shadow 0.3s ease;
 .dashboard-card:hover {
 box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
-
+```
 
 ### Flyer Card
+```css
 .flyer-card {
 background: white;
 border: 1px solid #e5e7eb;
@@ -110,6 +115,8 @@ object-fit: cover;
 .flyer-card .content {
 padding: 1rem;
 }
+
+```
 ## 4. Layout
 
 ### Grid System
