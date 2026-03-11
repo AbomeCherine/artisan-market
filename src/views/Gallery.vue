@@ -1,6 +1,6 @@
 <template>
   <div class="p-8">
-    
+    <!-- Header with logout -->
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-3xl font-bold text-green-600">Buyer Gallery</h1>
       <button @click="logout" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
@@ -8,7 +8,7 @@
 
     <p class="mb-6">Welcome, {{ user?.name }}! Browse products from all artisans.</p>
 
-    
+    <!-- Search and Filter Bar -->
     <div class="mb-8 flex flex-col md:flex-row gap-4">
       <input 
         v-model="searchQuery" 
@@ -26,7 +26,7 @@
       </select>
     </div>
 
-
+    <!-- Flyers Grid -->
     <div v-if="filteredFlyers.length === 0" class="text-center text-gray-500 py-10">
       No flyers found.
     </div>
@@ -46,7 +46,7 @@
           <p class="text-sm text-gray-500 mb-3">Artisan: {{ flyer.artisanName }}</p>
           
           <button 
-            @click="contactArtisan(flyer)"
+            @click="openContactModal(flyer)"
             class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
           >
             Contact Artisan
@@ -54,20 +54,31 @@
         </div>
       </div>
     </div>
+
+    <!-- Contact Modal -->
+    <ContactForm 
+      v-if="showContactModal"
+      :artisan="selectedArtisan"
+      @close="showContactModal = false"
+    />
   </div>
 </template>
 
 <script>
 import authStore from '../stores/authStore'
 import flyerStore from '../stores/flyerStore'
+import ContactForm from '../components/messaging/ContactForm.vue'
 
 export default {
+  components: { ContactForm },
   data() {
     return {
       user: authStore.getCurrentUser(),
       flyers: [],
       searchQuery: '',
-      selectedCategory: ''
+      selectedCategory: '',
+      showContactModal: false,
+      selectedArtisan: null
     }
   },
   computed: {
@@ -87,8 +98,13 @@ export default {
     loadFlyers() {
       this.flyers = flyerStore.getAll()
     },
-    contactArtisan(flyer) {
-      alert(`📧 Contact ${flyer.artisanName} at (simulated messaging system)\n\nProduct: ${flyer.name}`)
+    openContactModal(flyer) {
+      this.selectedArtisan = {
+        id: flyer.artisanId,
+        name: flyer.artisanName,
+        productName: flyer.name
+      }
+      this.showContactModal = true
     },
     logout() {
       authStore.logout()
