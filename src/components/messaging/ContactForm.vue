@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import messageStore from '../../stores/messageStore'
+import messageStore from '../../stores/messageStores'
 import authStore from '../../stores/authStore'
 
 export default {

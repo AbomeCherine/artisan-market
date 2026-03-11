@@ -1,6 +1,6 @@
 <template>
   <div class="p-8">
-    <!-- Header with logout -->
+    
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-3xl font-bold text-green-600">Buyer Gallery</h1>
       <button @click="logout" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
@@ -8,7 +8,7 @@
 
     <p class="mb-6">Welcome, {{ user?.name }}! Browse products from all artisans.</p>
 
-    <!-- Search and Filter Bar -->
+    
     <div class="mb-8 flex flex-col md:flex-row gap-4">
       <input 
         v-model="searchQuery" 
@@ -26,7 +26,7 @@
       </select>
     </div>
 
-    <!-- Flyers Grid -->
+    
     <div v-if="filteredFlyers.length === 0" class="text-center text-gray-500 py-10">
       No flyers found.
     </div>
@@ -39,7 +39,7 @@
           <p class="text-gray-600 text-sm mb-2">{{ flyer.description.substring(0, 100) }}...</p>
           
           <div class="flex justify-between items-center mb-2">
-            <span class="text-lg font-bold">{{ flyer.price }} CFA</span>
+            <span class="text-lg font-bold">{{ flyer.price }} RWF</span>
             <span class="text-xs bg-gray-200 px-2 py-1 rounded">{{ flyer.category }}</span>
           </div>
           

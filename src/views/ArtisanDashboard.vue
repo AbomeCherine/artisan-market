@@ -61,10 +61,10 @@ export default {
   }
 },
    deleteFlyer(id) {
-  console.log('Tentative de suppression ID:', id)  // ← Vérifie dans la console
+  console.log('Tentative de suppression ID:', id) 
   if (confirm('Are you sure?')) {
     flyerStore.delete(id)
-    this.loadFlyers()  // Recharge la liste
+    this.loadFlyers()  
     console.log('Après suppression, flyers:', flyerStore.getByArtisan(this.user.id))
   }
 },
