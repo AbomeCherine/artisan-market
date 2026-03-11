@@ -14,23 +14,47 @@
         <label class="block mb-2">Password</label>
         <input v-model="password" type="password" class="w-full p-2 border rounded" required>
       </div>
+      <div class="mb-4">
+  <label class="block mb-2">I am a:</label>
+  <select v-model="role" class="w-full p-2 border rounded">
+    <option value="buyer">Buyer</option>
+    <option value="artisan">Artisan</option>
+  </select>
+</div>
       <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded">Register</button>
     </form>
   </div>
 </template>
 
 <script>
+import authStore from '../stores/authStore'
+
 export default {
   data() {
     return {
       name: '',
       email: '',
-      password: ''
+      password: '',
+      role: 'buyer'  // Default role
     }
   },
   methods: {
     handleRegister() {
-      alert('Register clicked')
+      const userData = {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        role: this.role
+      }
+
+       const result = authStore.register(userData)
+      
+      if (result.success) {
+        alert('Registration successful! Please login.')
+        window.location.href = '/login'
+      } else {
+        alert(result.message)
+      }
     }
   }
 }

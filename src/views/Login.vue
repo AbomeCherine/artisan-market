@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import authStore from '../stores/authStore'
+
 export default {
   data() {
     return {
@@ -25,7 +27,20 @@ export default {
   },
   methods: {
     handleLogin() {
-      alert('Login clicked')
+      const result = authStore.login(this.email, this.password)
+      
+      if (result.success) {
+        alert('Login successful!')
+        // Redirect based on role
+        if (result.user.role === 'artisan') {
+          window.location.href = '/artisan/dashboard'
+        } else {
+          window.location.href = '/buyer/dashboard'
+        }
+
+         } else {
+        alert(result.message)
+      }
     }
   }
 }
